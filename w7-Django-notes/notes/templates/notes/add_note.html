@@ -1,0 +1,11 @@
+{% extends 'notes/base.html' %}
+
+{% block content %}
+    <form action='/add_note.html' method="post">
+        <label for='note_title'>Note Title</label>
+        <input id='note_title' type='text' name='note_title'></input>
+        <label for='note_body'>Note Body</label>
+        <input id='note_body' type='text' name='note_body'></input>
+        <input type='submit' value="OK"></input>
+    </form>
+{% endblock %}
