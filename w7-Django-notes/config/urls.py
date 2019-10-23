@@ -21,5 +21,9 @@ urlpatterns = [
     path('', views.notes_list, name='notes_list'),
     path('notes/<int:pk>/', views.note_detail, name='note_detail'),
     path('notes/add_note/', views.add_note, name='add_note'),
+    path('notes/<int:pk>/edit', views.edit_note, name='edit_note'),
+    path('notes/<int:pk>/delete', views.delete_note, name='delete_note'),
+    path('notes/search_notes', views.search_notes, name='search_notes'),
+    path('notes/sort_notes', views.sort_notes, name='sort_notes'),
     path('admin/', admin.site.urls),
 ]

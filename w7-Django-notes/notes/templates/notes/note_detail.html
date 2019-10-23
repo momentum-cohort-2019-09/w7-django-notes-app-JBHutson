@@ -1,12 +1,15 @@
 {% extends 'notes/base.html'%}
+{% load markdownify %}
 
-{% block content%}
+{% block content %}
     <h3>
         {{note.title}}
     </h3>
     <li>
-        <div>{{note.body}}</div>
+        <div>{{note.body|markdownify}}</div>
     </li>
 
+    <p><a href='/notes/{{note.id}}/edit'>Edit</a></p>
+    <p><a href='/notes/{{note.id}}/delete'>Delete</a></p>
     <p><a href='/'>Go Home</a></p>
 {% endblock %}
