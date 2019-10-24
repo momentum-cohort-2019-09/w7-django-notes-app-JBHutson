@@ -1,5 +1,5 @@
 from django import forms
-from .models import Note
+from .models import Note, Comment
 
 class NoteForm(forms.ModelForm):
     class Meta:
@@ -15,3 +15,8 @@ class SortForm(forms.Form):
                 ('Descending', 'Descending'),
                 ('Ascending', 'Ascending')]
     asc_or_dec = forms.ChoiceField(choices=CHOICES)
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('text', )

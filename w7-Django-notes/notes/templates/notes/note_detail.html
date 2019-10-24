@@ -3,12 +3,22 @@
 
 {% block content %}
     <h3>
-        {{note.title}}
+        Title: {{note.title}}
     </h3>
-    <li>
-        <div>{{note.body|markdownify}}</div>
-    </li>
-
+    <div>
+        Body Text: {{note.body|markdownify}}
+    </div>
+    {% if note.comments.all%}
+    <div>
+        Comments:
+        {% for comment in note.comments.all %}
+            <ol>
+                <li>{{comment.text|markdownify}}</li>
+            </ol>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <p><a href='/notes/{{note.id}}/add_comment'>Add Comment</a></p>
     <p><a href='/notes/{{note.id}}/edit'>Edit</a></p>
     <p><a href='/notes/{{note.id}}/delete'>Delete</a></p>
     <p><a href='/'>Go Home</a></p>

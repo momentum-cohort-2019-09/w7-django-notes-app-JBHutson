@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from notes.models import Note
-from .forms import NoteForm, SearchForm, SortForm
+from .forms import NoteForm, SearchForm, SortForm, CommentForm
 from django.utils import timezone
 from django.views.generic.edit import FormView
 # Create your views here.
@@ -43,6 +43,8 @@ def edit_note(request, pk):
             return redirect('/')
     else:
         form = NoteForm()
+        form.fields['title'].initial = note.title
+        form.fields['body'].initial = note.body
     return render(request, 'notes/edit_note.html',{
         'form': form
     })
@@ -93,5 +95,20 @@ def sort_notes(request):
     else:
         form = SortForm()
     return render(request, 'notes/sort_notes.html',{
+        'form': form
+    })
+
+def add_comment(request, pk):
+    note = get_object_or_404(Note, id=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.note = note
+            comment.save()
+            return redirect('note_detail', pk=note.id)
+    else:
+        form = CommentForm()
+    return render(request, 'notes/add_note.html',{
         'form': form
     })
