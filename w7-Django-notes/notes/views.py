@@ -40,7 +40,7 @@ def edit_note(request, pk):
             note = form.save(commit=False)
             note.updated_at = timezone.now()
             note.save()
-            return redirect('/')
+            return redirect('note_detail', pk= note.id)
     else:
         form = NoteForm()
         form.fields['title'].initial = note.title
